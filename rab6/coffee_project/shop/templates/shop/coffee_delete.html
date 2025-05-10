@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Удалить напиток</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.15.22/css/uikit.min.css" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="uk-container uk-text-center">
+    <h3 class="uk-heading-small">Удалить «{{ item.name }}»?</h3>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="uk-button uk-button-danger uk-button-large">Да, удалить</button>
+      <a href="{% url 'coffee_list' %}" class="uk-button uk-button-default uk-button-large">Отмена</a>
+    </form>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.15.22/js/uikit.min.js"></script>
+</body>
+</html>

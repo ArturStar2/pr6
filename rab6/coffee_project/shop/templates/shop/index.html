@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Меню кофейни</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.15.22/css/uikit.min.css" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="uk-container">
+    <h1 class="uk-heading-large uk-text-center">☕ Наше Меню</h1>
+    <div class="uk-flex uk-flex-center uk-margin">
+      <a href="{% url 'coffee_add' %}" class="uk-button uk-button-primary uk-button-large">Добавить напиток</a>
+    </div>
+    <ul class="uk-list uk-list-divider">
+      {% for coffee in items %}
+      <li class="uk-flex uk-flex-between uk-flex-middle">
+        <div><span uk-icon="icon: coffee; ratio: 1.2"></span> {{ coffee.name }} — {{ coffee.price }}₽</div>
+        <form action="{% url 'coffee_delete' coffee.pk %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="uk-button uk-button-danger uk-button-small">Удалить</button>
+        </form>
+      </li>
+      {% empty %}
+      <li class="uk-text-center">Пока нет напитков.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="uk-section uk-section-muted uk-text-center">
+    <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=1950&q=80"
+         alt="Кофейный баннер"
+         style="width: 100%; height: auto; margin-top: 30px; border-radius: 10px;" />
+  </div>
+
+
+  <section class="uk-section uk-section-secondary uk-light">
+    <div class="uk-container">
+      <h3 class="uk-heading-line"><span>Отзывы наших клиентов</span></h3>
+      <blockquote>
+        <p>«Лучший кофе в городе! Всегда уютная атмосфера.»</p>
+        <footer>— Анна Петрова</footer>
+      </blockquote>
+      <blockquote>
+        <p>«Обожаю их капучино. Рекомендую всем!»</p>
+        <footer>— Иван Смирнов</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <footer class="uk-section uk-section-small uk-text-center uk-light">
+    <p>Свяжитесь с нами: info@coffeebar.com | +7 (123) 456-78-90</p>
+    <p>© 2025 Кофейня «Арома»</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.15.22/js/uikit.min.js"></script>
+</body>
+</html>
